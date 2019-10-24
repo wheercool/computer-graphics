@@ -17,12 +17,14 @@ navigator.mediaDevices.getUserMedia({video: true})
             helper = helperCanvas.getContext('2d')
             ctx = canvas.getContext('2d');
 
-            setInterval(() => {
-                updateFrame();
-            }, 16);
+           loop();
         }
     });
 
+function loop() {
+    updateFrame();
+    requestAnimationFrame(loop);
+}
 function updateFrame() {
     helper.drawImage(video, 0, 0, width, height);
     const imageData = helper.getImageData(0, 0, width, height);
